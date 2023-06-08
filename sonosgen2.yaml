@@ -1,0 +1,82 @@
+blueprint:
+# Adapted for the GEN2 square remote by James Crook
+# Based on https://gist.github.com/erkr/a437ebcb98a2b5ba2deebabd02f5ffae Eric Kreuwels
+  name: ZHA - IKEA Symfonisk sound controller GEN2 for media
+  description: 'Control media with an IKEA Symfonisk sound controller GEN2 (Square one)
+    Single press will toggle Play/Pause on your selected media player.
+    Single dot and double dots are not working due to errors in zigpy March 2023
+    WARNING (MainThread) [zigpy.zcl] [0x125C:1:0xfc7f] Unknown cluster command 1 b \x02\x01
+    WARNING (MainThread) [zigpy.zcl] [0x125C:1:0xfc7f] Unknown cluster command 1 b \x01\x01'
+  domain: automation
+  input:
+    remote:
+      name: Remote
+      description: IKEA Symfonisk controller GEN2 to use
+      selector:
+        device:
+          integration: zha
+          manufacturer: IKEA of Sweden
+          multiple: false
+    media_player:
+      name: Media Player
+      description: The media player to control
+      selector:
+        target:
+          entity:
+            domain: media_player
+  source_url: https://community.home-assistant.io/t/zha-ikea-symfonisk-sound-controller-gen2-the-square-one/542402
+mode: single
+max_exceeded: silent
+trigger:
+- platform: event
+  event_type: zha_event
+  event_data:
+    device_id: !input remote
+action:
+- variables:
+    command: '{{ trigger.event.data.command }}'
+    cluster_id: '{{ trigger.event.data.cluster_id }}'
+    endpoint_id: '{{ trigger.event.data.endpoint_id }}'
+    args: '{{ trigger.event.data.args }}'
+- choose:
+  - conditions:
+    - '{{ command == ''toggle'' }}'
+    - '{{ cluster_id == 6 }}'
+    - '{{ endpoint_id == 1 }}'
+    sequence:
+    - service: media_player.media_play_pause
+      target: !input media_player
+  - conditions:
+    - '{{ command == ''move_with_on_off'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ trigger.event.data.params.move_mode == 0}}'
+    sequence:
+    - service: media_player.volume_up
+      target: !input media_player
+    - delay: 1
+  - conditions:
+    - '{{ command == ''move_with_on_off'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ trigger.event.data.params.move_mode == 1 }}'
+    sequence:
+    - service: media_player.volume_down
+      target: !input media_player
+    - delay: 1
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ trigger.event.data.params.step_mode == 0 }}'
+    sequence:
+    - service: media_player.media_next_track
+      target: !input media_player
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ trigger.event.data.params.step_mode == 1 }}'
+    sequence:
+    - service: media_player.media_previous_track
+      target: !input media_player
