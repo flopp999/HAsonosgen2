@@ -1,7 +1,7 @@
 blueprint:
 # Adapted for the GEN2 square remote by James Crook
 # Based on https://gist.github.com/erkr/a437ebcb98a2b5ba2deebabd02f5ffae Eric Kreuwels
-  name: ZHA - IKEA Symfonisk sound controller GEN2 for media
+  name: Deconz - IKEA Symfonisk sound controller GEN2 for media
   description: 'Control media with an IKEA Symfonisk sound controller GEN2 (Square one)
     Single press will toggle Play/Pause on your selected media player.
     Single dot and double dots are not working due to errors in zigpy March 2023
@@ -14,7 +14,7 @@ blueprint:
       description: IKEA Symfonisk controller GEN2 to use
       selector:
         device:
-          integration: zha
+          integration: deconz
           manufacturer: IKEA of Sweden
           multiple: false
     media_player:
@@ -29,7 +29,7 @@ mode: single
 max_exceeded: silent
 trigger:
 - platform: event
-  event_type: zha_event
+  event_type: deconz_event
   event_data:
     device_id: !input remote
 action:
