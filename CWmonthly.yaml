@@ -10,7 +10,6 @@ blueprint:
         entity:
           filter:
             integration: checkwatt
-            state_class: total
             device_class: monetary
 trigger:
   platform: time
