@@ -28,7 +28,7 @@ variables:
 action:
   service: input_number.set_value
   data_template:
-    value: "value_template: \"{{ month | float + day | float }}\""
+    value: "value_template: \"{{ states(day) | float }}\""
   target:
     entity_id: !input monthly_sensor
 mode: single
