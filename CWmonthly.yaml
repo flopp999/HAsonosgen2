@@ -11,6 +11,12 @@ blueprint:
           filter:
             integration: checkwatt
             device_class: monetary
+sensors:
+  basedoninput:
+    friendly_name: 'Based On Input'
+    value_template: >
+    {{ something(using(the(!input motion_entity))) }}
+    icon_template: mdi:iconname
 trigger:
   platform: time
   at: "00:00:01"
