@@ -3,7 +3,7 @@ blueprint:
   description: Turn a light on based on detected motion
   domain: automation
   input:
-    sensor:
+    remote:
       name: Monthl
       description: CW monthly
       selector:
