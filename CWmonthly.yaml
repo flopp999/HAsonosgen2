@@ -1,5 +1,5 @@
 blueprint:
-  name: CheckWatt Monthly6
+  name: CheckWatt Monthly
   description: creates an automation to update monthly revenue entity
   domain: automation
   input:
