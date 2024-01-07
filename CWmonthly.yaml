@@ -14,8 +14,7 @@ blueprint:
   sensors:
     basedoninput:
       friendly_name: 'Based On Input'
-      value_template: >-
-      {{ (states('sensor.lgf_active_power_import')) }}
+      value_template: "value_template \"{{ (states('sensor.lgf_active_power_import')) }}\""
 trigger:
   platform: time
   at: "00:00:01"
