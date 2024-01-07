@@ -4,10 +4,10 @@ blueprint:
   domain: automation
   input:
     sensor:
-      name: Remote
-      description: IKEA Symfonisk controller GEN2 to use
+      name: Monthl
+      description: CW monthly
       selector:
         device:
           integration: checkwatt
-          manufacturer: checkwatt2
+          manufacturer: checkwatt
           multiple: false
