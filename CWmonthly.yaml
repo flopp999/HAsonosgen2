@@ -15,7 +15,7 @@ trigger:
   at: "00:00:01"
 condition:
   - condition: template
-  value_template: "value_template: \"{{ now().day == 1 }}\""
+    value_template: "value_template: \"{{ now().day == 1 }}\""
 action:
   service: sensor.set
   target:
