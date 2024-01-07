@@ -18,10 +18,8 @@ blueprint:
             domain: input_number
 trigger:
   platform: time
-  at: "23:59:50"
-condition:
-  - condition: template
-    value_template: "value_template: \"{{ now().day == 1 }}\""
+  at: "18:45:00"
+
 
 variables:
   month: !input monthly_sensor
