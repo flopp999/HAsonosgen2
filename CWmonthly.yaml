@@ -1,5 +1,5 @@
 blueprint:
-  name: CheckWatt monthly3
+  name: CheckWatt Monthly
   description: create a monthly average entity
   domain: automation
   ### fo get the daily sensor
@@ -17,13 +17,13 @@ blueprint:
         entity:
           filter:
             domain: input_number
-trigger:
-  platform: time
-  at: "00:00:01"
-condition:
-  - condition: template
-    value_template: "value_template: \"{{ now().day == 1 }}\""
+
 action:
-  - service: number.set_value
-    data: {}
+  service: input_number.set_value
+  data_template:
+    value: >-
+    {{ states('!input monthly_sensor') | float +
+    states('!input daily') | float }}
+  target:
+    entity_id: !input monthly_sensor
 mode: single
