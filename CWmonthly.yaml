@@ -2,29 +2,12 @@ blueprint:
   name: Motion Light Tutorial
   description: Turn a light on based on detected motion
   domain: automation
-  automation:
-  - alias: "Reset Monthly Sensor"
-    trigger:
-      platform: time
-      at: "00:00:01"
-    condition:
-      condition: time
-      weekday: 1  # This ensures it only triggers on the 1st day of the month
-    action:
-      service: sensor.set
-      target:
-        entity_id: sensor.checkwatt_monthly_monetary_sensor
-      data:
-        value: 0
-
-  - alias: "Update Monthly Sensor"
-    trigger:
-      platform: time
-      at: "23:59:00"
-    action:
-      service: sensor.set
-      target:
-        entity_id: sensor.checkwatt_monthly_monetary_sensor
-      data_template:
-        value: "{{ states('sensor.checkwatt_monthly_monetary_sensor') | float + states('sensor.checkwatt_daily_monetary_sensor') | float }}"
-
+  input:
+    sensor:
+      name: Remote
+      description: IKEA Symfonisk controller GEN2 to use
+      selector:
+        device:
+          integration: checkwatt
+          manufacturer: -
+          multiple: false
