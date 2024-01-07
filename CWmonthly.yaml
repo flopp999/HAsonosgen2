@@ -26,7 +26,7 @@ condition:
 action:
   service: input_number.set_value
   data_template:
-    value: "2"
+    value: "value_template: \"{{ (!input monthly_sensornow | float) + (!input daily_sensor | float) }}\""
   target:
     entity_id: !input monthly_sensor
 mode: single
