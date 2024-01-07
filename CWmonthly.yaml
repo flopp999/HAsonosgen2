@@ -1,14 +1,3 @@
-
-sensor:
-  - platform: template
-    sensors:
-      checkwatt_monthly_monetary_sensor:
-        friendly_name: "Checkwatt Monthly Net Income"
-        unit_of_measurement: "Currency"  # Replace with your currency unit
-        value_template: "{{ states('sensor.checkwatt_monthly_monetary_sensor') | float + states('sensor.checkwatt_daily_monetary_sensor') | float }}"
-
-
-
 blueprint:
   name: CheckWatt monthly
   description: create a monthly average entity
@@ -20,7 +9,9 @@ blueprint:
       selector:
         entity:
           filter:
-            - integration: checkwatt
+            integration: checkwatt
+            state_class: total
+            device_class: monetary
 trigger:
   platform: time
   at: "00:00:01"
