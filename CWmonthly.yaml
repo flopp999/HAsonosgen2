@@ -9,5 +9,5 @@ blueprint:
       selector:
         device:
           integration: checkwatt
-          manufacturer: checkwatt
+          manufacturer: checkwatt2
           multiple: false
