@@ -2,7 +2,6 @@ blueprint:
   name: CheckWatt Monthly2
   description: creates a monthly revenue entity
   domain: automation
-  ### fo get the daily sensor
   input:
     daily_sensor:
       name: CheckWatt daily revenue sensor
