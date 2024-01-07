@@ -18,7 +18,7 @@ blueprint:
             domain: input_number
 trigger:
   platform: time
-  at: "18:45:00"
+  at: "18:50:00"
 
 
 variables:
