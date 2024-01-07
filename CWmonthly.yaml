@@ -14,8 +14,7 @@ blueprint:
   sensors:
     basedoninput:
       friendly_name: 'Based On Input'
-      value_template: >
-      {{ something(using(the(!input motion_entity))) }}
+      value_template: "value_template: \"{{ 2 }}\""
 
   trigger:
     platform: time
