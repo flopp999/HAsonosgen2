@@ -21,9 +21,7 @@ blueprint:
 action:
   service: input_number.set_value
   data_template:
-    value: >-
-    {{ states('!input monthly_sensor') | float +
-    states('!input daily') | float }}
+    value: "2"
   target:
     entity_id: !input monthly_sensor
 mode: single
