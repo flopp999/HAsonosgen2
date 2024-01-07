@@ -2,7 +2,10 @@ blueprint:
   name: CheckWatt monthly
   description: create a monthly average entity
   domain: automation
-    device:
-      filter:
-      - integration: checkwatt
-        manufacturer: checkwatt
+  input:
+    door_sensor:
+      name: door sens
+      selector:
+        entity:
+          filter:
+            - integration: checkwatt
