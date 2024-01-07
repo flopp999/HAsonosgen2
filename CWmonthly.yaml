@@ -3,11 +3,9 @@ blueprint:
   description: Turn a light on based on detected motion
   domain: automation
   input:
-    remote:
-      name: Monthl
-      description: CW monthly
-      selector:
-        device:
-          integration: checkwatt
-          manufacturer: checkwatt
-          multiple: false
+    device:
+      filter:
+      - integration: checkwatt
+        manufacturer: checkwatt
+      entity:
+      - domain: sensor
