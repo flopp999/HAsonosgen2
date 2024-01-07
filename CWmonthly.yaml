@@ -22,11 +22,15 @@ trigger:
 condition:
   - condition: template
     value_template: "value_template: \"{{ now().day == 1 }}\""
-    
+
+variables:
+  month: !input monthly_sensor
+  day: !input daily_sensor
+  
 action:
   service: input_number.set_value
   data_template:
-    value: "value_template: \"{{ (!input monthly_sensor | float) + (!input daily_sensor | float) }}\""
+    value: "value_template: \"{{ month | float + day | float }}\""
   target:
     entity_id: !input monthly_sensor
 mode: single
