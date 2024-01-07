@@ -2,6 +2,7 @@ blueprint:
   name: CheckWatt monthly
   description: create a monthly average entity
   domain: automation
+  ### fo get the daily sensor
   input:
     door_sensor:
       name: door sens
