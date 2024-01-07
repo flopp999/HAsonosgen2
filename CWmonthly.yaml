@@ -5,8 +5,20 @@ blueprint:
   ### fo get the daily sensor
   input:
     door_sensor:
-      name: door sens
+      name: CheckWatt daily revenue sensor
       selector:
         entity:
           filter:
             - integration: checkwatt
+trigger:
+  platform: time
+  at: "00:00:01"
+condition:
+  - condition: template
+  value_template: "value_template: \"{{ now().day == 1 }}\""
+action:
+  service: sensor.set
+  target:
+    entity_id: sensor.checkwatt_monthly_monetary_sensor
+  data:
+    value: 0
