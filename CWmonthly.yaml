@@ -1,10 +1,21 @@
+
+sensor:
+  - platform: template
+    sensors:
+      checkwatt_monthly_monetary_sensor:
+        friendly_name: "Checkwatt Monthly Net Income"
+        unit_of_measurement: "Currency"  # Replace with your currency unit
+        value_template: "{{ states('sensor.checkwatt_monthly_monetary_sensor') | float + states('sensor.checkwatt_daily_monetary_sensor') | float }}"
+
+
+
 blueprint:
   name: CheckWatt monthly
   description: create a monthly average entity
   domain: automation
   ### fo get the daily sensor
   input:
-    door_sensor:
+    daily_sensor:
       name: CheckWatt daily revenue sensor
       selector:
         entity:
